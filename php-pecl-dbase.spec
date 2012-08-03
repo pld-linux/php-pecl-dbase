@@ -4,7 +4,7 @@ Summary:	%{_modname} - dBase database file access functions
 Summary(pl.UTF-8):	%{_modname} - dostęp do plików baz danych dBase
 Name:		php-pecl-%{_modname}
 Version:	5.1.0
-Release:	1
+Release:	2
 License:	PHP 3.01
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{_modname}-%{version}.tgz
