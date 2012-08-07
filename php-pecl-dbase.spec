@@ -1,13 +1,13 @@
-%define		_modname	dbase
-%define		_status		stable
-Summary:	%{_modname} - dBase database file access functions
-Summary(pl.UTF-8):	%{_modname} - dostęp do plików baz danych dBase
-Name:		php-pecl-%{_modname}
+%define		modname	dbase
+%define		status	stable
+Summary:	%{modname} - dBase database file access functions
+Summary(pl.UTF-8):	%{modname} - dostęp do plików baz danych dBase
+Name:		php-pecl-%{modname}
 Version:	5.1.0
 Release:	3
 License:	PHP 3.01
 Group:		Development/Languages/PHP
-Source0:	http://pecl.php.net/get/%{_modname}-%{version}.tgz
+Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
 # Source0-md5:	b36bec6c6a8ada4a6072e2f9df92dce8
 URL:		http://pecl.php.net/package/dbase/
 BuildRequires:	php-devel >= 3:5.0.0
@@ -22,33 +22,33 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This module allows you to access records stored in dBase-format (dbf)
 databases.
 
-In PECL status of this extension is: %{_status}.
+In PECL status of this extension is: %{status}.
 
 %description -l pl.UTF-8
 Ten moduł pozwala na dostęp do rekordów zapisanych w plikach baz
 danych w formacie dBase (dbf).
 
-To rozszerzenie ma w PECL status: %{_status}.
+To rozszerzenie ma w PECL status: %{status}.
 
 %prep
-%setup -q -c
+%setup -qc
+mv %{modname}-%{version}/* .
 
 %build
-cd %{_modname}-%{version}
 phpize
 %configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d
+%{__make} install \
+	EXTENSION_DIR=%{php_extensiondir} \
+	INSTALL_ROOT=$RPM_BUILD_ROOT
 
-%{__make} -C %{_modname}-%{version} install \
-	INSTALL_ROOT=$RPM_BUILD_ROOT \
-	EXTENSION_DIR=%{php_extensiondir}
-cat <<'EOF' > $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d/%{_modname}.ini
-; Enable %{_modname} extension module
-extension=%{_modname}.so
+install -d $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d
+cat <<'EOF' > $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d/%{modname}.ini
+; Enable %{modname} extension module
+extension=%{modname}.so
 EOF
 
 %clean
@@ -64,5 +64,5 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%config(noreplace) %verify(not md5 mtime size) %{php_sysconfdir}/conf.d/%{_modname}.ini
-%attr(755,root,root) %{php_extensiondir}/%{_modname}.so
+%config(noreplace) %verify(not md5 mtime size) %{php_sysconfdir}/conf.d/%{modname}.ini
+%attr(755,root,root) %{php_extensiondir}/%{modname}.so
