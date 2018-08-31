@@ -1,17 +1,19 @@
 %define		php_name	php%{?php_suffix}
 %define		modname		dbase
-%define		status		stable
+%define		status		beta
+%define		snap		beta1
+%define		rel 		1
 Summary:	%{modname} - dBase database file access functions
 Summary(pl.UTF-8):	%{modname} - dostęp do plików baz danych dBase
 Name:		%{php_name}-pecl-%{modname}
-Version:	5.1.1
-Release:	1
+Version:	7.0.0
+Release:	0.%{snap}.%{rel}
 License:	PHP 3.01
 Group:		Development/Languages/PHP
-Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
-# Source0-md5:	b2a22740fe705a7c6a2fb440c3659a34
+Source0:	http://pecl.php.net/get/%{modname}-%{version}%{snap}.tgz
+# Source0-md5:	777fb23f829cb6e9590b11a1987866f6
 URL:		http://pecl.php.net/package/dbase/
-BuildRequires:	%{php_name}-devel >= 3:5.0.4
+BuildRequires:	%{php_name}-devel >= 3:7.0.0
 BuildRequires:	rpmbuild(macros) >= 1.650
 %{?requires_php_extension}
 Provides:	php(dbase) = %{version}
@@ -33,7 +35,7 @@ To rozszerzenie ma w PECL status: %{status}.
 
 %prep
 %setup -qc
-mv %{modname}-%{version}/* .
+mv %{modname}-%{version}%{snap}/* .
 
 %build
 phpize
